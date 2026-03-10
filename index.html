@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nehal Dixit — Senior TPM & Scrum Master</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ed;
+    --accent: #e85c2e;
+    --accent2: #2e7de8;
+    --gold: #d4a84b;
+    --mid: #1e1e1e;
+    --border: rgba(245,242,237,0.1);
+    --text-dim: rgba(245,242,237,0.45);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* HEADER */
+  header {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: 'TPM';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif;
+    font-size: 18rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.02);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232,92,46,0.12);
+    border: 1px solid rgba(232,92,46,0.3);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 2px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+
+  .meta-item a {
+    color: var(--accent2);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+  }
+
+  .meta-item a:hover { color: var(--white); }
+
+  .visa-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    border: 1px solid rgba(212,168,75,0.3);
+    background: rgba(212,168,75,0.07);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  /* KPI STRIP */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 3rem 0;
+    overflow: hidden;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .kpi {
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+
+  .kpi:last-child { border-right: none; }
+
+  .kpi:hover { background: rgba(255,255,255,0.03); }
+
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+  }
+
+  .kpi:hover::before { transform: scaleX(1); }
+
+  .kpi-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .kpi-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.03em;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .skill-card {
+    background: var(--black);
+    padding: 1.5rem;
+    transition: background 0.25s ease;
+    position: relative;
+  }
+
+  .skill-card:hover { background: var(--mid); }
+
+  .skill-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.6rem;
+  }
+
+  .skill-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    padding: 0.2rem 0.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    background: rgba(232,92,46,0.1);
+    border-color: rgba(232,92,46,0.3);
+    color: var(--accent);
+  }
+
+  /* CERTIFICATIONS */
+  .cert-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cert {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--mid);
+    border: 1px solid var(--border);
+    padding: 0.9rem 1.2rem;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 200px;
+    transition: border-color 0.25s ease;
+  }
+
+  .cert:hover { border-color: var(--accent); }
+
+  .cert-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(232,92,46,0.12);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .cert-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .cert-body {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+  }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.3rem;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(232,92,46,0.5);
+  }
+
+  .timeline-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-dates {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    margin-bottom: 0.7rem;
+  }
+
+  .timeline-bullets {
+    list-style: none;
+  }
+
+  .timeline-bullets li {
+    font-size: 0.8rem;
+    color: rgba(245,242,237,0.65);
+    padding: 0.2rem 0;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-size: 0.7rem;
+  }
+
+  /* AI SECTION */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .ai-card {
+    background: linear-gradient(135deg, rgba(46,125,232,0.08), rgba(232,92,46,0.05));
+    border: 1px solid rgba(46,125,232,0.2);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: border-color 0.25s;
+  }
+
+  .ai-card:hover { border-color: rgba(46,125,232,0.5); }
+
+  .ai-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--accent2);
+  }
+
+  .ai-card-desc {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* TOOLS */
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .tool {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+
+  .tool-primary {
+    background: rgba(232,92,46,0.12);
+    border: 1px solid rgba(232,92,46,0.25);
+    color: var(--accent);
+  }
+
+  .tool-secondary {
+    background: rgba(46,125,232,0.08);
+    border: 1px solid rgba(46,125,232,0.2);
+    color: var(--accent2);
+  }
+
+  .tool-tertiary {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+
+  .tool:hover { transform: translateY(-2px); }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--mid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.25s;
+  }
+
+  .edu-card:hover { border-color: var(--accent); }
+
+  .edu-school {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--accent);
+    min-width: 120px;
+    text-align: center;
+    line-height: 1.1;
+    font-size: 0.8rem;
+  }
+
+  .edu-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .footer-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+  }
+
+  .footer-cta:hover {
+    background: var(--white);
+    transform: translateY(-2px);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .ai-grid { grid-template-columns: 1fr; }
+    .edu-card { flex-direction: column; gap: 1rem; }
+    .edu-divider { width: 40px; height: 1px; }
+    header::after { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .kpi-strip { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="badge">Available Now · Austin, TX · Remote / Hybrid</div>
+    <h1>Nehal<br><span>Dixit</span></h1>
+    <p class="tagline">Senior TPM · SAFe Scrum Master · AI-Powered Delivery · PMP · CSM</p>
+    <div class="header-meta">
+      <span class="meta-item">📍 Austin, TX 78750</span>
+      <span class="meta-item">📞 913-284-4390</span>
+      <span class="meta-item">✉️ <a href="mailto:007.nehal@gmail.com">007.nehal@gmail.com</a></span>
+      <span class="meta-item">🔗 <a href="https://linkedin.com/in/nehal-dixit-pmp" target="_blank">linkedin.com/in/nehal-dixit-pmp</a></span>
+      <span class="visa-tag">H-1B Transfer Ready · I-140 Approved</span>
+    </div>
+  </header>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi">
+      <div class="kpi-number">32%</div>
+      <div class="kpi-label">Sprint Predictability Improvement</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number">22%</div>
+      <div class="kpi-label">Throughput Increase</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number">40%</div>
+      <div class="kpi-label">Spillover Reduction</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number">$12M</div>
+      <div class="kpi-label">Portfolio Managed</div>
+    </div>
+  </div>
+
+  <!-- CORE SKILLS -->
+  <section>
+    <div class="section-label">Core Capabilities</div>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-category">Delivery</div>
+        <div class="skill-title">Technical Program Management</div>
+        <div class="skill-tags">
+          <span class="tag">Full Lifecycle PM</span>
+          <span class="tag">Scope Management</span>
+          <span class="tag">Schedule Management</span>
+          <span class="tag">Budget Oversight</span>
+          <span class="tag">Risk Management</span>
+          <span class="tag">Dependency Mapping</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-category">Agile</div>
+        <div class="skill-title">SAFe & Scrum Mastery</div>
+        <div class="skill-tags">
+          <span class="tag">SAFe PI Planning</span>
+          <span class="tag">Release Train Engineer</span>
+          <span class="tag">Scrum of Scrums</span>
+          <span class="tag">ART Facilitation</span>
+          <span class="tag">4 Concurrent Teams</span>
+          <span class="tag">5+ PI Sessions</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-category">Intelligence</div>
+        <div class="skill-title">AI-Powered Delivery</div>
+        <div class="skill-tags">
+          <span class="tag">Claude Automation</span>
+          <span class="tag">Jira API Workflows</span>
+          <span class="tag">AI Dashboards</span>
+          <span class="tag">Auto Sprint Reports</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Retro Insights</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-category">Leadership</div>
+        <div class="skill-title">Stakeholder & Team Management</div>
+        <div class="skill-tags">
+          <span class="tag">Executive Comms</span>
+          <span class="tag">Influencing w/o Authority</span>
+          <span class="tag">Conflict Resolution</span>
+          <span class="tag">Psychological Safety</span>
+          <span class="tag">Servant Leadership</span>
+          <span class="tag">Junior PM Mentoring</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-category">Ceremonies</div>
+        <div class="skill-title">Sprint Facilitation</div>
+        <div class="skill-tags">
+          <span class="tag">Sprint Planning</span>
+          <span class="tag">Daily Standup</span>
+          <span class="tag">Backlog Refinement</span>
+          <span class="tag">Sprint Review</span>
+          <span class="tag">Retrospective</span>
+          <span class="tag">DoD Ownership</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-category">Metrics</div>
+        <div class="skill-title">Data-Driven Delivery</div>
+        <div class="skill-tags">
+          <span class="tag">Velocity Tracking</span>
+          <span class="tag">Cycle Time</span>
+          <span class="tag">Lead Time</span>
+          <span class="tag">Burndown Health</span>
+          <span class="tag">Throughput</span>
+          <span class="tag">Sprint Rollover</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-category">Governance</div>
+        <div class="skill-title">Compliance & Quality</div>
+        <div class="skill-tags">
+          <span class="tag">Audit Trail Docs</span>
+          <span class="tag">Risk Registers</span>
+          <span class="tag">Escalation Protocols</span>
+          <span class="tag">Change Management</span>
+          <span class="tag">Process Standards</span>
+          <span class="tag">Post-Implementation Review</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-category">Community</div>
+        <div class="skill-title">PMI Leadership</div>
+        <div class="skill-tags">
+          <span class="tag">PMI Austin Chapter</span>
+          <span class="tag">Social Media Chair</span>
+          <span class="tag">56% Attendance Growth</span>
+          <span class="tag">165% Subscription Growth</span>
+          <span class="tag">PMI Peer Mentor</span>
+          <span class="tag">2017–Present</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AI WORKFLOWS -->
+  <section>
+    <div class="section-label">AI-Powered Workflows</div>
+    <div class="ai-grid">
+      <div class="ai-card">
+        <div class="ai-card-title">Sprint Intelligence Dashboard</div>
+        <div class="ai-card-desc">Built Jira API + Power BI + Claude pipeline that delivers real-time velocity, cycle time, and sprint health to C-suite without manual overhead.</div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-title">Automated Retrospective Insights</div>
+        <div class="ai-card-desc">Designed generative AI workflow that analyzes sprint patterns across multiple teams and surfaces root-cause insights for coaching conversations.</div>
+      </div>
+      <div class="ai-card">
+        <div class="ai-card-title">Risk Signal Automation</div>
+        <div class="ai-card-desc">JQL + Claude automation that flags at-risk stories before sprint end — reducing late-breaking surprises by proactively surfacing delivery threats.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section>
+    <div class="section-label">Certifications</div>
+    <div class="cert-row">
+      <div class="cert">
+        <div class="cert-icon">PMP</div>
+        <div>
+          <div class="cert-name">Project Management Professional</div>
+          <div class="cert-body">PMI · Active</div>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">SASM</div>
+        <div>
+          <div class="cert-name">SAFe Scrum Master</div>
+          <div class="cert-body">Scaled Agile · Active</div>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">CSM</div>
+        <div>
+          <div class="cert-name">Certified ScrumMaster</div>
+          <div class="cert-body">Scrum Alliance · Active</div>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-icon">AI</div>
+        <div>
+          <div class="cert-name">Generative AI for Project Managers</div>
+          <div class="cert-body">PMI · 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section>
+    <div class="section-label">Experience</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-role">Senior TPM · SAFe Scrum Master · Release Train Engineer</div>
+        <div class="timeline-company">Liquibase (formerly Datical) · Austin, TX</div>
+        <div class="timeline-dates">Jan 2024 – Present</div>
+        <ul class="timeline-bullets">
+          <li>Scrum Master for 4 concurrent engineering teams (PRO, Interop, LBIO)</li>
+          <li>32% sprint predictability improvement · 22% throughput increase · &lt;10% rollover</li>
+          <li>Built AI-powered dashboards using Jira API, Power BI & Claude</li>
+          <li>Facilitated 5+ SAFe PI Planning sessions as Release Train Engineer</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-role">Program Manager · Scrum Master · Release Manager</div>
+        <div class="timeline-company">Liquibase · Austin, TX</div>
+        <div class="timeline-dates">Jul 2019 – Dec 2023</div>
+        <ul class="timeline-bullets">
+          <li>Led distributed teams across 3 time zones · 28% velocity improvement</li>
+          <li>40% spillover reduction through structured retrospectives & governance</li>
+          <li>Built Jira admin infrastructure adopted as org-wide standard</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-role">Technical PM · Scrum Master</div>
+        <div class="timeline-company">Internet Brands · Austin, TX</div>
+        <div class="timeline-dates">Jan 2018 – May 2019</div>
+        <ul class="timeline-bullets">
+          <li>38% reduction in customer escalation rates</li>
+          <li>Led globally distributed team across 3 time zones</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-role">Senior Program Manager · Process Improvement Lead</div>
+        <div class="timeline-company">Avatar Solar Inc. · Houston / LA / Gujarat</div>
+        <div class="timeline-dates">Mar 2010 – Jul 2015</div>
+        <ul class="timeline-bullets">
+          <li>$12M portfolio · 256-person cross-functional team</li>
+          <li>5MW flagship project: 32% under budget · 56% ahead of schedule</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section>
+    <div class="section-label">Tools & Technologies</div>
+    <div class="tools-list">
+      <span class="tool tool-primary">Jira Admin</span>
+      <span class="tool tool-primary">JQL</span>
+      <span class="tool tool-primary">Confluence</span>
+      <span class="tool tool-primary">SAFe</span>
+      <span class="tool tool-primary">Power BI</span>
+      <span class="tool tool-secondary">Claude AI</span>
+      <span class="tool tool-secondary">Jira API</span>
+      <span class="tool tool-secondary">SQL</span>
+      <span class="tool tool-secondary">GitHub</span>
+      <span class="tool tool-secondary">Azure DevOps</span>
+      <span class="tool tool-tertiary">MS Project</span>
+      <span class="tool tool-tertiary">SharePoint</span>
+      <span class="tool tool-tertiary">Slack</span>
+      <span class="tool tool-tertiary">Figma</span>
+      <span class="tool tool-tertiary">Google Workspace</span>
+      <span class="tool tool-tertiary">Atlas / JPD</span>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="section-label">Education</div>
+    <div class="edu-card">
+      <div class="edu-school">UT<br>AUSTIN</div>
+      <div class="edu-divider"></div>
+      <div>
+        <div class="edu-degree">M.S. Engineering & Technology Management</div>
+        <div class="edu-meta">The University of Texas at Austin · GPA 3.85 · 2017</div>
+      </div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-school">SGU</div>
+      <div class="edu-divider"></div>
+      <div>
+        <div class="edu-degree">B.E. Computer Science</div>
+        <div class="edu-meta">South Gujarat University · 2009</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      Nehal Dixit · Senior TPM & Scrum Master · Austin, TX<br>
+      007.nehal@gmail.com · 913-284-4390<br>
+      H-1B Transfer Ready · I-140 Approved · Available Immediately
+    </div>
+    <a href="https://linkedin.com/in/nehal-dixit-pmp" target="_blank" class="footer-cta">
+      Connect on LinkedIn →
+    </a>
+  </footer>
+
+</div>
+
+</body>
+</html>
